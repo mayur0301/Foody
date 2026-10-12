@@ -1,0 +1,2832 @@
+{
+  "info": {
+    "_postman_id": "a1e23fea-f308-4769-abd0-67bcb2be479f",
+    "name": "HotelManagement",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39020428"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-Setup-Key",
+                "value": "{{admin_password}}",
+                "description": "Required for SUPER_ADMIN or HOTEL_ADMIN roles",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin_new\",\n  \"password\": \"123456\",\n  \"name\": \"New Admin\",\n  \"email\": \"admin@hotel.com\",\n  \"phone\": \"9876543210\",\n  \"role\": \"HOTEL_ADMIN\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// Newly Added Hotels with Subs\r\n// {\r\n//   \"phone\": \"96654929931\",\r\n//   \"password\": \"Admin@123\"\r\n// }\r\n{\r\n  \"phone\": \"7894561230\",\r\n  \"password\": \"123456\"\r\n}\r\n// {\r\n//   \"phone\": \"3214569870\",\r\n//   \"password\": \"123456\"\r\n// }\r\n\r\n// Hotel Bhagy\r\n// {\r\n//     \"phone\": \"9898986565\",\r\n//     \"password\": \"123456\"\r\n// }\r\n\r\n// Super Admin\r\n// {\r\n//     \"phone\": \"1234567890\",\r\n//     \"password\": \"123456\"\r\n// }\r\n\r\n// Admin of hotel Lakeview\r\n// {\r\n//     \"phone\": \"15975384126\",\r\n//     \"password\": \"123456\"\r\n// }\r\n// Admin of hotel bhagyshri\r\n// {\r\n//     \"phone\": \"9898986565\",\r\n//     \"password\": \"123456\"\r\n// }\r\n// {\r\n//     \"phone\": \"8554837128\",\r\n//     \"password\": \"123456\"\r\n// }",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "SuperAdmin",
+      "item": [
+        {
+          "name": "Subscriptions",
+          "item": [
+            {
+              "name": "ApproveHotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDg0MzYxMSwiZXhwIjoxNzc0OTMwMDExfQ.IGGZa5PHR6D2rMjWRiu-jobJm87FcvMCWXciBRhNA4I",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"planId\": \"69c75723b6a12ad633b36ef8\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/{{hotelId}}/approve",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    "{{hotelId}}",
+                    "approve"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetAllSubscribed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDg0NDYzOCwiZXhwIjoxNzc0OTMxMDM4fQ.xVwe2HlIxqKq64qTh1hMMEDkvC96z-W_bwO1QLhTKJk",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"planId\": \"69c75723b6a12ad633b36ef8\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/subscription/admin/all",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "subscription",
+                    "admin",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetAllSubscribedWithHotelId",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDY5OTM2NiwiZXhwIjoxNzc0Nzg1NzY2fQ.dEpFBvgvTJ4e0RaZDZG7hdLa2oD1vDj2Xrf5TNcCSVo",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"planId\": \"69c75723b6a12ad633b36ef8\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/subscription/admin/:hotelId",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "subscription",
+                    "admin",
+                    ":hotelId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "hotelId",
+                      "value": "69c76fa3c904f8d7b2d355e9"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Register Hotel - SuperAdmin",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDU5NDU0NiwiZXhwIjoxNzc0NjgwOTQ2fQ.wbtZPgswdtzDONOZI2iTjQdx05JnKdt-MTDnyvqZcEg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n{\r\n  \"name\": \"Grand Spice Kitchen\",\r\n  \"address\": \"123 Main Street\",\r\n  \"city\": \"Mumbai\",\r\n  \"country\": \"India\",\r\n  \"phone\": \"9876543210\",\r\n  \"email\": \"grand@spice.com\",\r\n  \"adminUsername\": \"grandadmin\",\r\n  \"adminPassword\": \"Admin@123\",\r\n  \"adminName\": \"Rajesh Kumar\",\r\n  \"planId\": \"69c62a008160b7b74fa74b1c\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateSubscription",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDU5NDU0NiwiZXhwIjoxNzc0NjgwOTQ2fQ.wbtZPgswdtzDONOZI2iTjQdx05JnKdt-MTDnyvqZcEg",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "\r\n\r\n//  Enterprise Plan (₹4999/mo)\r\n// {\r\n//   \"name\": \"Enterprise\",\r\n//   \"slug\": \"enterprise-monthly\",\r\n//   \"description\": \"Unlimited everything\",\r\n//   \"price\": 4999,\r\n//   \"currency\": \"INR\",\r\n//   \"billingCycle\": \"MONTHLY\",\r\n//   \"features\": [\"ORDER_MANAGEMENT\", \"STAFF_MANAGEMENT\", \"SALES_ANALYTICS\", \"BULK_MENU_UPLOAD\", \"POS_SYSTEM\", \"ADVANCED_REPORTS\"],\r\n//   \"limits\": {\r\n//     \"maxStaff\": -1,\r\n//     \"maxDishes\": -1,\r\n//     \"maxCategories\": -1,\r\n//     \"maxOrders\": -1\r\n//   },\r\n//   \"sortOrder\": 3,\r\n//   \"trialDays\": 14\r\n// }\r\n\r\n// Pro Plan (₹999/mo)\r\n// {\r\n//   \"name\": \"Pro\",\r\n//   \"slug\": \"pro-monthly\",\r\n//   \"description\": \"For growing restaurants\",\r\n//   \"price\": 999,\r\n//   \"currency\": \"INR\",\r\n//   \"billingCycle\": \"MONTHLY\",\r\n//   \"features\": [\"ORDER_MANAGEMENT\", \"STAFF_MANAGEMENT\", \"SALES_ANALYTICS\", \"POS_SYSTEM\"],\r\n//   \"limits\": {\r\n//     \"maxStaff\": 10,\r\n//     \"maxDishes\": 200,\r\n//     \"maxCategories\": 30,\r\n//     \"maxOrders\": -1\r\n//   },\r\n//   \"sortOrder\": 2,\r\n//   \"isFeatured\": true,\r\n//   \"trialDays\": 7\r\n// }\r\n\r\n//Starter Plan (Free)\r\n// {\r\n//   \"name\": \"Starter\",\r\n//   \"slug\": \"starter-monthly\",\r\n//   \"description\": \"Free tier for new hotels\",\r\n//   \"price\": 0,\r\n//   \"currency\": \"INR\",\r\n//   \"billingCycle\": \"MONTHLY\",\r\n//   \"features\": [\"ORDER_MANAGEMENT\"],\r\n//   \"limits\": {\r\n//     \"maxStaff\": 2,\r\n//     \"maxDishes\": 20,\r\n//     \"maxCategories\": 5,\r\n//     \"maxOrders\": -1\r\n//   },\r\n//   \"sortOrder\": 1,\r\n//   \"trialDays\": 0\r\n// }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/plans/admin",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "plans",
+                    "admin"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "GlobalUserManagement",
+          "item": [
+            {
+              "name": "getAllUsers",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/users",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "ToggleUserStatus",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/users/:id/toggle-status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    ":id",
+                    "toggle-status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "69c631ed36e5e45cf91d65b8"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "DeleteUser",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"status\":\"blocked\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/users/delete/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    "delete",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "69c631ed36e5e45cf91d65b8"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Platform Configuration System",
+          "item": [
+            {
+              "name": "getAdminSettings",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/settings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetSpecificAnnouncement",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/settings/:key",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "settings",
+                    ":key"
+                  ],
+                  "variable": [
+                    {
+                      "key": "key",
+                      "value": "DASHBOARD_ANNOUNCEMENT"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "CreateSetting",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"key\": \"DASHBOARD_ANNOUNCEMENT\",\r\n  \"value\": \"Get 20% off on yearly plans this weekend!\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/settings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getAllUsers Copy 2",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/settings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Notication",
+          "item": [
+            {
+              "name": "PostNotif",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Special Discount Offer\",\r\n    \"message\": \"Get 20% off on all food items today!\",\r\n    \"type\": \"ALERT\",\r\n    \"target\": \"ALL\",\r\n    \"targetHotel\": null,\r\n    \"expiresAt\": \"2026-03-30T23:59:59.000Z\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/notifications",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "notifications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "GetNotif",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Special Discount Offer\",\r\n    \"message\": \"Get 20% off on all food items today!\",\r\n    \"type\": \"ALERT\",\r\n    \"target\": \"ALL\",\r\n    \"targetHotel\": null,\r\n    \"expiresAt\": \"2026-03-30T23:59:59.000Z\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/admin/notifications",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "admin",
+                    "notifications"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Super Admin Dashboard",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/hotels/super/dashboard",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "hotels",
+                "super",
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "HotelSide",
+      "item": [
+        {
+          "name": "Orders",
+          "item": [
+            {
+              "name": "postOrder",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYiIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTY2NTQ5Mjk5MzEiLCJob3RlbCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYSIsImFkbWluIjoiNjljNzVmY2M2NDUyZTZkM2U3YjVmN2ZiIiwiaWF0IjoxNzc0Njc0MDY2LCJleHAiOjE3NzQ3NjA0NjZ9.hHAn6K4B9Z3mw3ZUEdmoSAL0XUGxWfCaKb6aNy7841s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"customerName\": \"Onkar Sharma\",\r\n  \"customerPhone\": \"70124578541\",\r\n  \"gstPercent\": 18,\r\n  \"items\": [\r\n    {\r\n      \"dishId\": \"69c760de63c441ff2a4c3652\",\r\n      \"quantity\": 2\r\n    }\r\n  ],\r\n  \"notes\": \"Less spicy\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    ""
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "putOrder",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYiIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTY2NTQ5Mjk5MzEiLCJob3RlbCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYSIsImFkbWluIjoiNjljNzVmY2M2NDUyZTZkM2U3YjVmN2ZiIiwiaWF0IjoxNzc0Njc0MDY2LCJleHAiOjE3NzQ3NjA0NjZ9.hHAn6K4B9Z3mw3ZUEdmoSAL0XUGxWfCaKb6aNy7841s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"items\": [\r\n    { \"dishId\": \"69c760de63c441ff2a4c3652\", \"quantity\": 3 }\r\n    //{ \"dishId\": \"DISH_ID_2\", \"quantity\": 5 }\r\n  ],\r\n  \"gstPercent\": 18,\r\n  \"notes\": \"Updated notes\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/update/69c7627963c441ff2a4c3668",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    "update",
+                    "69c7627963c441ff2a4c3668"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "patchStatus",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWJmN2YxYjVhODRhOTEyZjc0YTIzMyIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTg5ODk4NjU2NSIsImhvdGVsIjoiNjk5YmY3ZjFiNWE4NGE5MTJmNzRhMjMyIiwiaWF0IjoxNzcxODI5MzU5LCJleHAiOjE3NzE5MTU3NTl9.SWDrSdk7JqG1AqQEBV5mAA5X4yRd5WBGGDI1G5ja27M",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "// {\r\n//   \"status\": \"preparing\"\r\n// }\r\n\r\n// {\r\n//   \"status\": \"ready\"\r\n// }\r\n\r\n// {\r\n//   \"status\": \"delivered\"\r\n// }\r\n\r\n{\r\n  \"status\": \"paid\"\r\n}\r\n\r\n// {\r\n//   \"status\": \"cancelled\"\r\n// }\r\n\r\n// 🔑 Transition Rules:\r\n// pending -> preparing | cancelled\r\n// preparing -> ready | cancelled\r\n// ready -> delivered | cancelled\r\n// delivered -> paid\r\n// paid -> []\r\n// cancelled -> []",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/699c23647f5064636ba9a4c8/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    "699c23647f5064636ba9a4c8",
+                    "status"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getMyOrders",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/?timeRange=week&status=pending&page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    ""
+                  ],
+                  "query": [
+                    {
+                      "key": "timeRange",
+                      "value": "week",
+                      "description": "today, week, month, year, custom"
+                    },
+                    {
+                      "key": "status",
+                      "value": "pending",
+                      "description": "pending, preparing, ready, delivered, paid, billed, cancelled"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getOrderByid",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ODA0NWNiYmRlMmQ1NTIwMzI3YzViMSIsInBob25lIjoiOTg3NjU0MzIxMCIsImlhdCI6MTc3MDAxNTYzNywiZXhwIjoxNzcwMTAyMDM3fQ.YBiTsyEl4F_rHqTRBv0LmebPLQuqkbalPgZ6Yt82w0Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n\r\n  \"password\": \"StrongPassword@123\",\r\n  \"phone\": \"9876543210\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/69804b9f6daa775372a824b1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    "69804b9f6daa775372a824b1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getOrderBill",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/orders/69c7627963c441ff2a4c3668/bill",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "orders",
+                    "69c7627963c441ff2a4c3668",
+                    "bill"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Profile",
+          "item": [
+            {
+              "name": "update",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ODA3MGE5NzQzMGIxMzlhNzE5NDVjZCIsInBob25lIjoiODU1NDgzNzEyOCIsImlhdCI6MTc3MDA5ODgyNSwiZXhwIjoxNzcwMTg1MjI1fQ.yJ8lLUTnqRyqWKq5dLNcI-CjSDqg00fvThA67CZGfoU",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"username\": \"Demo\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/profile/update",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "profile",
+                    "update"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getProfile",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2E1NTI2NGIxYTg4MjRlN2Y0OWIyNSIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiNzg5NDU2MTIzMCIsImhvdGVsIjoiNjljYTU1MjY0YjFhODgyNGU3ZjQ5YjI0IiwiYWRtaW4iOiI2OWNhNTUyNjRiMWE4ODI0ZTdmNDliMjUiLCJpYXQiOjE3NzQ4Njk0MzMsImV4cCI6MTc3NDk1NTgzM30.YE5eGJj3S7r6ragwprirQbkX5bfRW6mP20wWShtirhc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/profile/get",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "profile",
+                    "get"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Dish",
+          "item": [
+            {
+              "name": "getDishes (Hotel/Context)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/dish",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getAllDishes (Super Admin)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/dish/all?page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getDishesByHotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/dish/hotel/:hotelId",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish",
+                    "hotel",
+                    ":hotelId"
+                  ],
+                  "variable": [
+                    {
+                      "key": "hotelId",
+                      "value": "69c75fcc6452e6d3e7b5f7fa"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "addDish",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Dal\",\r\n    \"price\": 250,\r\n    \"category\": \"69c760b463c441ff2a4c364c\",\r\n    \"isAvailable\": true,\r\n    \"type\": \"veg\"\r\n   // \"hotelId\": \"\" // Required if Super Admin\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/dish",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "BulkUpload",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYiIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTY2NTQ5Mjk5MzEiLCJob3RlbCI6IjY5Yzc1ZmNjNjQ1MmU2ZDNlN2I1ZjdmYSIsImFkbWluIjoiNjljNzVmY2M2NDUyZTZkM2U3YjVmN2ZiIiwiaWF0IjoxNzc0Njc0MDY2LCJleHAiOjE3NzQ3NjA0NjZ9.hHAn6K4B9Z3mw3ZUEdmoSAL0XUGxWfCaKb6aNy7841s",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "uuid": "c8cdd9d2-98b6-4c33-84b4-824fa3deea04",
+                      "src": "postman-cloud:///1f12a65c-52c6-4300-b8d4-3f96c68f4b2f"
+                    },
+                    {
+                      "key": "categoryId",
+                      "value": "69c760b463c441ff2a4c364c",
+                      "type": "text",
+                      "uuid": "b8133f1d-31a3-4257-91cf-d6358a174eb7"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/dish/bulk-upload",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish",
+                    "bulk-upload"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UpdateDish",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWVlOTNmNGYxYTEyNjQ1MmI5YWNjOSIsInJvbGUiOiJTVVBFUl9BRE1JTiIsInBob25lIjoiMTIzNDU2Nzg5MCIsImlhdCI6MTc3NDYxMzA0OSwiZXhwIjoxNzc0Njk5NDQ5fQ.49I_84Xe0e3FCvZxY6lgJPH6i7rhASDwEXDsnMlSk-Q",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Pav Bhaji\",\r\n    \"price\": 250,\r\n    \"category\": \"69c760b463c441ff2a4c364c\",\r\n    \"isAvailable\": true,\r\n    \"type\": \"veg\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/dish/69c760de63c441ff2a4c3652",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish",
+                    "69c760de63c441ff2a4c3652"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete dish",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5OWJmN2YxYjVhODRhOTEyZjc0YTIzMyIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTg5ODk4NjU2NSIsImhvdGVsIjoiNjk5YmY3ZjFiNWE4NGE5MTJmNzRhMjMyIiwiaWF0IjoxNzcxODI5MzU5LCJleHAiOjE3NzE5MTU3NTl9.SWDrSdk7JqG1AqQEBV5mAA5X4yRd5WBGGDI1G5ja27M",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/dish/699c19756695dba7100bd663",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "dish",
+                    "699c19756695dba7100bd663"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "item": [
+            {
+              "name": "getCategories (Hotel/Context)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/category",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getAllCategories (Super Admin)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/category/all?page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "getCategoriesByHotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/category/hotel/:hotelId?page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category",
+                    "hotel",
+                    ":hotelId"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "hotelId",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "postCat",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Full Course\"\r\n // \"hotelId\": \"\" // Required if Super Admin\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/category",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "postCat Copy",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Full Course1\"\r\n // \"hotelId\": \"\" // Required if Super Admin\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/category/update/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "category",
+                    "update",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "69ca5ee2fdfd903ed94c6f35"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "DEACTIVATED_Rooms",
+          "item": [
+            {
+              "name": "Create Room",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"number\": \"101\",\n  \"type\": \"Deluxe\",\n  \"price\": 2000,\n  \"status\": \"available\"\n  //\"hotel\": \"\" // hotelId (Required if Super Admin)\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/rooms",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "rooms"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Rooms",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/rooms?hotelId=",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "rooms"
+                  ],
+                  "query": [
+                    {
+                      "key": "hotelId",
+                      "value": "",
+                      "description": "Optional for Super Admin"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Room By ID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/rooms/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "rooms",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Room",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price\": 2500,\n  \"status\": \"available\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/rooms/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "rooms",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Room",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/rooms/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "rooms",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "DEACTIVATED_Bookings",
+          "item": [
+            {
+              "name": "Create Booking",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"room\": \"roomId\",\n  \"checkIn\": \"2023-12-01\",\n  \"checkOut\": \"2023-12-05\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get My Bookings",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Bookings (Admin/Staff)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings/all?hotelId=",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "hotelId",
+                      "value": "",
+                      "description": "Optional for Super Admin"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Booking By ID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Booking Status",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"confirmed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings/:id/status",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings",
+                    ":id",
+                    "status"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Cancel Booking",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/bookings/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "bookings",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Staff",
+          "item": [
+            {
+              "name": "Get All Staff (System)",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/staff/all?page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff",
+                    "all"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Staff Created By Me",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/staff/me?page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff",
+                    "me"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Staff",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"staff1bhagyshri\",\n  \"password\": \"123456\",\n  \"phone\": \"7894561230\",\n  \"name\": \"staff1bhagyshri\",\n  \"email\": \"staff1bhagyshri@hotel.com\"\n  //\"hotelId\": \"\" // Required if Super Admin\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/staff",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Staff",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"staff_updated\",\n  \"name\": \"Updated Staff Name\",\n  \"email\": \"updated@email.com\",\n  \"phone\": \"9988776655\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/staff/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Staff By Hotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/staff/hotel/:hotelId?page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff",
+                    "hotel",
+                    ":hotelId"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "hotelId"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Staff",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/staff/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "staff",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Hotels",
+          "item": [
+            {
+              "name": "Hotel Dashboard",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/:id/dashboard",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    ":id",
+                    "dashboard"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeRange",
+                      "value": "today",
+                      "description": "today, week, month, year, custom",
+                      "disabled": true
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "69c7681aa9be570a45cde65b"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Approve Hotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/:id/approve",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    ":id",
+                    "approve"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "69c7c2a21c56290a4898cdd1"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Hotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Hotel Bhagyshri\",\n  \"address\": \"Nashik\",\n  \"city\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"phone\": \"9898986565\",\n  \"email\": \"bhagyshri@hotel.com\",\n  \"adminUsername\": \"admin_bhagy\",\n  \"adminPassword\": \"123456\",\n  \"adminName\": \"Bhagyshri Admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Customers",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/customers?timeRange=month&page=1&limit=10",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    "customers"
+                  ],
+                  "query": [
+                    {
+                      "key": "timeRange",
+                      "value": "month"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Hotels",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Hotel By ID",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Hotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"Grand Plaza Hotel - Updated\",\n  \"city\": \"Pune\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Hotel",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/api/hotels/:id",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "hotels",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Recharge",
+          "item": [
+            {
+              "name": "CreateRecharge",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Y2E1NTI2NGIxYTg4MjRlN2Y0OWIyNSIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiNzg5NDU2MTIzMCIsImhvdGVsIjoiNjljYTU1MjY0YjFhODgyNGU3ZjQ5YjI0IiwiYWRtaW4iOiI2OWNhNTUyNjRiMWE4ODI0ZTdmNDliMjUiLCJpYXQiOjE3NzQ4NjgyMjUsImV4cCI6MTc3NDk1NDYyNX0.DHudCLZCwbv6L6s7uttZuSNhxA629qmXX62UmXhuTFc",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"planId\":\"69c9fa5bf7d23ca299cfd67b\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/subscription/recharge",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "subscription",
+                    "recharge"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "VerifyPayment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5YzdjMmEyMWM1NjI5MGE0ODk4Y2RkMiIsInJvbGUiOiJIT1RFTF9BRE1JTiIsInBob25lIjoiOTY2NTQ5Mjk5MzUiLCJob3RlbCI6IjY5YzdjMmEyMWM1NjI5MGE0ODk4Y2RkMSIsImlhdCI6MTc3NDY5OTE3MCwiZXhwIjoxNzc0Nzg1NTcwfQ.dJMM6ME30dSB96t_CnaNKzZFaAcQ37uVwpyZ_mJ8oWk",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"razorpay_order_id\": \"order_Q1a2b3c4d5e6f7\",\r\n  \"razorpay_payment_id\": \"pay_Q1x2y3z4a5b6c7\",\r\n  \"razorpay_signature\": \"generated_signature_from_razorpay\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:3000/api/subscription/verify-payment",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "api",
+                    "subscription",
+                    "verify-payment"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "RegisterHotel",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Hotel Bhagyshri1\",\r\n  \"address\": \"Nashik\",\r\n  \"city\": \"Maharashtra\",\r\n  \"country\": \"India\",\r\n  \"phone\": \"98989865651\",\r\n  \"email\": \"bhagyshri1@hotel.com\",\r\n  \"adminUsername\": \"admin_bhagy1\",\r\n  \"adminPassword\": \"123456\",\r\n  \"adminName\": \"Bhagyshri Admin\",\r\n  \"planId\": \"69c75723b6a12ad633b36ef8\" \r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/hotels/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "hotels",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GetAllPlans",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3000/api/plans",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3000",
+          "path": [
+            "api",
+            "plans"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Inventory Management",
+      "item": [
+        {
+          "name": "Get Inventory Stats",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/inventory",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "inventory"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Inventory Logs",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/api/inventory/logs",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "inventory",
+                "logs"
+              ],
+              "query": [
+                {
+                  "key": "categoryId",
+                  "value": "YOUR_CATEGORY_ID",
+                  "description": "Optional: Filter logs by category",
+                  "disabled": true
+                },
+                {
+                  "key": "type",
+                  "value": "CONSUME",
+                  "description": "Optional: Filter by type (ADD, CONSUME, RESTORE, ADJUST)",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Stock",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryId\": \"YOUR_CATEGORY_ID\",\n  \"quantity\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/inventory/add",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "inventory",
+                "add"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Adjust Stock (Manual Override)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"categoryId\": \"YOUR_CATEGORY_ID\",\n  \"newStock\": 100\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/api/inventory/adjust",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "api",
+                "inventory",
+                "adjust"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

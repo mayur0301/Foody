@@ -1,0 +1,11 @@
+name,price,isAvailable,type
+Chicken Biryani,250,true,non-veg
+Mutton Biryani,320,true,non-veg
+Veg Biryani,220,true,veg
+Paneer Biryani,260,true,veg
+Egg Biryani,230,true,non-veg
+Hyderabadi Chicken Biryani,340,true,non-veg
+Kolkata Chicken Biryani,300,true,non-veg
+Lucknowi Biryani,310,true,non-veg
+Mushroom Biryani,240,true,veg
+Soya Chaap Biryani,250,true,veg
